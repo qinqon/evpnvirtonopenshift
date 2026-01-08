@@ -1,10 +1,13 @@
-#!/bin/bash
+#!/bin/bash -xe
 
-helm repo add openperouter https://openperouter.github.io/openperouter
+#helm repo add openperouter https://openperouter.github.io/openperouter
 
-helm repo update
-helm install openperouter openperouter/openperouter -f values.yaml -n openperouter-system --create-namespace
+#helm repo update
+#helm install openperouter openperouter/openperouter -f values.yaml -n openperouter-system --create-namespace
 
+helm install openperouter $HOME/Documents/cnv/sandbox/gcp/openperouter/charts/openperouter/ --namespace openperouter-system -f values.yaml --create-namespace
+oc apply -f ipvlan-and-route.yaml
+	
 oc adm policy add-scc-to-user privileged -n openperouter-system -z openperouter-controller
 oc adm policy add-scc-to-user privileged -n openperouter-system -z openperouter-perouter
 

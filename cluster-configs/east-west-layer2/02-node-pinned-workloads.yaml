@@ -26,9 +26,18 @@ spec:
     metadata:
       labels:
         kubevirt.io/vm: vm-1
+        app: evpn-vm
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: fedecluster-worker-0.karmalabs.corp
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - evpn-vm
+            topologyKey: kubernetes.io/hostname
       domain:
         devices:
           interfaces:
@@ -77,9 +86,18 @@ spec:
     metadata:
       labels:
         kubevirt.io/vm: vm-2
+        app: evpn-vm
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: fedecluster-worker-1.karmalabs.corp
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - evpn-vm
+            topologyKey: kubernetes.io/hostname
       domain:
         devices:
           interfaces:

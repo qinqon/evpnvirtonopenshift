@@ -1,0 +1,9 @@
+# gcp-l3vni.yaml
+apiVersion: openpe.openperouter.github.io/v1alpha1
+kind: L3VNI
+metadata:
+  name: red
+  namespace: openperouter-system
+spec:
+  vrf: red
+  vni: 100
